@@ -17,9 +17,25 @@ export const App: React.FC = () => {
   console.log(loading, error, data);
 
   return (
-    <>
-      <div>UpdateHive - React Client Component</div>
+    <div>
+      <h1>UpdateHive - React Client Component</h1>
+      <h3>UpdateHive Hook data</h3>
+      <div>
+        {loading || data === undefined ? (
+          <div>Loading changelogs ...</div>
+        ) : (
+          <div>
+            {data.map((changelog) => (
+              <div className="hookTable">
+                <div>{changelog.version}</div>
+                <div>{changelog.description}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      <h3>UpdateHive react components</h3>
       <ChangelogContainer />
-    </>
+    </div>
   );
 };
