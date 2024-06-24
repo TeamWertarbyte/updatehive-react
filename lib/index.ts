@@ -1,10 +1,11 @@
-export { ChangelogContainer } from './components/ChangelogContainer';
+export type {
+  UpdateHiveConfig,
+  Changelog,
+  ChangelogEntryInterface,
+  ChangeType,
+  VariantType,
+} from "./changelog.types";
 
-/**
- * Base hook to get all changelogs for a product.
- */
-export function useChangelogs() {
-  return {
-    changelog: 'changelog',
-  };
-}
+export { useChangelogs } from "./changelog.hook";
+
+export { ChangelogContainer } from "./components/ChangelogContainer";

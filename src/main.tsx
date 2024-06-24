@@ -1,11 +1,10 @@
-import React from "react";
+import * as React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import {ChangelogContainer} from "../lib";
+import { App } from "./App.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <div>UpdateHive - React Client Component</div>
-    <ChangelogContainer/>
+    <App />
   </React.StrictMode>,
 );
