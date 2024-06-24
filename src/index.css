@@ -3,11 +3,11 @@ body {
   justify-content: center;
 }
 
-div {
-  margin: 8px;
-}
-
-.hookTable {
+.hook.table {
   display: flex;
   flex-direction: row;
+}
+
+.hook.div {
+  margin: 8px;
 }

@@ -25,10 +25,14 @@ export const App: React.FC = () => {
           <div>Loading changelogs ...</div>
         ) : (
           <div>
+            <div className="hook table">
+              <div className="hook div">Version</div>
+              <div className="hook div">Description</div>
+            </div>
             {data.map((changelog) => (
-              <div className="hookTable">
-                <div>{changelog.version}</div>
-                <div>{changelog.description}</div>
+              <div className="hook table">
+                <div className="hook div">{changelog.version}</div>
+                <div className="hook div">{changelog.description}</div>
               </div>
             ))}
           </div>
