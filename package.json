@@ -1,17 +1,30 @@
 {
   "name": "updatehive-react",
-  "private": true,
-  "version": "0.0.0",
+  "description": "React components and hook for UpdateHive",
+  "private": false,
+  "version": "0.0.1",
   "type": "module",
+  "main": "dist/updatehive-react.umd.js",
+  "module": "dist/updatehive-react.es.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/updatehive-react.es.js",
+      "require": "./dist/updatehive-react.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -p ./tsconfig-build.json && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepublishOnly": "yarn build"
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/node": "^20.14.6",
@@ -24,6 +37,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "prettier": "^3.3.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   }
