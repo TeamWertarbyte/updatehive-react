@@ -3,6 +3,7 @@ import * as React from "react";
 
 export const App: React.FC = () => {
   const API_KEY = import.meta.env.VITE_UPDATEHIVE_API_KEY;
+  const PRODUCT = import.meta.env.VITE_UPDATEHIVE_PRODUCT;
 
   const { loading, error, data } = useChangelogs({
     connection: {
@@ -10,7 +11,7 @@ export const App: React.FC = () => {
       url: "http://localhost:3000/api",
     },
     changelogs: {
-      product: "66587d16c9f5d3bca4bc2b9d",
+      product: PRODUCT,
     },
   });
 
