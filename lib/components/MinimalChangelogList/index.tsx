@@ -37,9 +37,11 @@ export const MinimalChangelogList: React.FC<Props> = ({
             <div key={`changelog-${index}`}>
               <Box sx={() => ({ marginBottom: "8px" })}>
                 <Typography level="h3" sx={() => ({ marginRight: "8px" })}>
-                  Version {changelog.version}:
+                  Version {changelog.version}
                 </Typography>
-                <Typography>{changelog.description}</Typography>
+                {changelog.description && (
+                  <Typography>{changelog.description}</Typography>
+                )}
               </Box>
               <List
                 marker={"circle"}
