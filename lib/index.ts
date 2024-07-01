@@ -9,3 +9,5 @@ export type {
 export { useChangelogs } from "./changelog.hook";
 
 export { ChangelogContainer } from "./components/ChangelogContainer";
+export { MinimalChangelogList } from "./components/MinimalChangelogList";
+export { ChangelogContext } from "./components/ChangelogContext";
