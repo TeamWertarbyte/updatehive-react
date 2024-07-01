@@ -8,7 +8,7 @@ import * as React from "react";
 export const App: React.FC = () => {
   const API_KEY = import.meta.env.VITE_UPDATEHIVE_API_KEY;
   const PRODUCT = import.meta.env.VITE_UPDATEHIVE_PRODUCT;
-  const serviceURL = "http://localhost:3000/api";
+  const serviceURL = import.meta.env.VITE_UPDATEHIVE_URL;
 
   const { loading, error, data } = useChangelogs({
     connection: {

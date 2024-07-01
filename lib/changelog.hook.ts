@@ -5,7 +5,7 @@ import {
   UpdateHiveHookResult,
 } from "./changelog.types.ts";
 
-const DEFAULT_API_URL = "https://updatehive.com/api";
+const DEFAULT_API_URL = "https://updatehive.wertarbyte.com/api";
 
 const buildRequestURL = (config: UpdateHiveConfig): string => {
   const API_URL = `${config.connection.url ?? DEFAULT_API_URL}`;

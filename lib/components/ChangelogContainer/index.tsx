@@ -21,7 +21,7 @@ export const ChangelogContainer: React.FC<Props> = ({
   const { loading, error, data } = useChangelogs({
     connection: {
       API_KEY,
-      url: config?.url || "http://localhost:3000/api",
+      url: config?.url,
     },
     changelogs: {
       product,
