@@ -14,7 +14,13 @@ const ChangeTypeMap: Record<ChangeType, string> = {
   [ChangeType.REMOVED]: "[Entfernt]",
 };
 
-export const MinimalChangelogList: React.FC = () => {
+interface Props {
+  changeTypeMapper?: Record<ChangeType, string>;
+}
+
+export const MinimalChangelogList: React.FC<Props> = ({
+  changeTypeMapper = ChangeTypeMap,
+}) => {
   const { loading, error, data } = useContext(ChangelogContext);
 
   return (
@@ -51,7 +57,7 @@ export const MinimalChangelogList: React.FC = () => {
                         level="title-sm"
                         sx={() => ({ marginRight: "8px" })}
                       >
-                        {ChangeTypeMap[entry.changeType]}
+                        {changeTypeMapper[entry.changeType]}
                       </Typography>
                       <Typography level="body-sm">
                         {entry.description}
