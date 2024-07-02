@@ -1,8 +1,14 @@
 {
   "name": "updatehive-react",
-  "description": "React components and hook for UpdateHive",
+  "description": "React hook and components for UpdateHive",
+  "author": "Wertarbyte <kontakt@wertarbyte.com> (https://wertarbyte.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TeamWertarbyte/updatehive-react/issues"
+  },
+  "homepage": "https://www.wertarbyte.com/products/updateHive",
   "private": false,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "main": "dist/updatehive-react.umd.js",
   "module": "dist/updatehive-react.es.js",
