@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import { Changelog } from "../../changelog.types.ts";
+import { createContext } from 'react';
+import { Changelog } from '../../changelog.types.ts';
 
 export const ChangelogContext = createContext<{
   loading: boolean;

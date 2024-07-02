@@ -1,17 +1,17 @@
-import * as React from "react";
-import { useContext } from "react";
-import { ChangelogContext } from "../ChangelogContext";
-import { Box, CircularProgress, List, ListItem, Typography } from "@mui/joy";
-import { ChangeType } from "../../changelog.types.ts";
+import * as React from 'react';
+import { useContext } from 'react';
+import { ChangelogContext } from '../ChangelogContext';
+import { Box, CircularProgress, List, ListItem, Typography } from '@mui/joy';
+import { ChangeType } from '../../changelog.types.ts';
 
 const ChangeTypeMap: Record<ChangeType, string> = {
-  [ChangeType.FEATURE]: "[Neu]",
-  [ChangeType.IMPROVEMENT]: "[Angegepasst]",
-  [ChangeType.FIX]: "[Behoben]",
-  [ChangeType.NOTE]: "[Notiz]",
-  [ChangeType.BREAKING]: "[Geändertes Verhalten]",
-  [ChangeType.KNOWNISSUE]: "[Bekanntes Problem]",
-  [ChangeType.REMOVED]: "[Entfernt]",
+  [ChangeType.FEATURE]: '[Neu]',
+  [ChangeType.IMPROVEMENT]: '[Angegepasst]',
+  [ChangeType.FIX]: '[Behoben]',
+  [ChangeType.NOTE]: '[Notiz]',
+  [ChangeType.BREAKING]: '[Geändertes Verhalten]',
+  [ChangeType.KNOWNISSUE]: '[Bekanntes Problem]',
+  [ChangeType.REMOVED]: '[Entfernt]',
 };
 
 interface Props {
@@ -35,8 +35,8 @@ export const MinimalChangelogList: React.FC<Props> = ({
         <div>
           {data.map((changelog, index) => (
             <div key={`changelog-${index}`}>
-              <Box sx={() => ({ marginBottom: "8px" })}>
-                <Typography level="h3" sx={() => ({ marginRight: "8px" })}>
+              <Box sx={() => ({ marginBottom: '8px' })}>
+                <Typography level="h3" sx={() => ({ marginRight: '8px' })}>
                   Version {changelog.version}
                 </Typography>
                 {changelog.description && (
@@ -44,20 +44,20 @@ export const MinimalChangelogList: React.FC<Props> = ({
                 )}
               </Box>
               <List
-                marker={"circle"}
-                sx={() => ({ "--ListItem-minHeight": 20 })}
+                marker={'circle'}
+                sx={() => ({ '--ListItem-minHeight': 20 })}
               >
                 {changelog.entries.map((entry, entryIndex) => (
                   <ListItem
                     sx={() => ({
-                      padding: "0px",
+                      padding: '0px',
                     })}
                     key={`changelog-${index}-entry-${entryIndex}`}
                   >
-                    <Box sx={() => ({ display: "flex", flexDirection: "row" })}>
+                    <Box sx={() => ({ display: 'flex', flexDirection: 'row' })}>
                       <Typography
                         level="title-sm"
-                        sx={() => ({ marginRight: "8px" })}
+                        sx={() => ({ marginRight: '8px' })}
                       >
                         {changeTypeMapper[entry.changeType]}
                       </Typography>
