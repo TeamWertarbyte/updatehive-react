@@ -1,6 +1,5 @@
 import * as React from "react";
-import { useContext } from "react";
-import { ChangelogContext } from "../ChangelogContext";
+import { useUpdateHiveContext } from "../ChangelogContext";
 import { Box, CircularProgress, List, ListItem, Typography } from "@mui/joy";
 import { ChangeType } from "../../changelog.types.ts";
 
@@ -21,7 +20,7 @@ interface Props {
 export const MinimalChangelogList: React.FC<Props> = ({
   changeTypeMapper = ChangeTypeMap,
 }) => {
-  const { loading, error, data } = useContext(ChangelogContext);
+  const { loading, error, data } = useUpdateHiveContext();
 
   return (
     <div>
