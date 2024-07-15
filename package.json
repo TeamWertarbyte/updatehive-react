@@ -1,5 +1,5 @@
 {
-  "name": "updatehive-react",
+  "name": "@wertarbyte/updatehive-react",
   "description": "React hook and components for UpdateHive",
   "author": "Wertarbyte <kontakt@wertarbyte.com> (https://wertarbyte.com)",
   "license": "MIT",
