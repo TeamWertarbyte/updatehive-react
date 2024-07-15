@@ -2,8 +2,8 @@ import {
   ChangelogContainer,
   MinimalChangelogList,
   useChangelogs,
-} from "../lib";
-import * as React from "react";
+} from '../lib';
+import * as React from 'react';
 
 export const App: React.FC = () => {
   const API_KEY = import.meta.env.VITE_UPDATEHIVE_API_KEY;
@@ -33,7 +33,7 @@ export const App: React.FC = () => {
           <div>Loading changelogs ...</div>
         ) : (
           <div>
-            <div className="hook table" key={"header"}>
+            <div className="hook table" key={'header'}>
               <div className="hook div">Version</div>
               <div className="hook div">Description</div>
             </div>

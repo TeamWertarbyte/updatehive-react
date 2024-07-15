@@ -27,18 +27,18 @@ export type UpdateHiveHookResult = {
 };
 
 export enum VariantType {
-  TEXT_ONLY = "TEXT_ONLY",
-  IMAGE_AND_TEXT = "IMAGE_AND_TEXT",
+  TEXT_ONLY = 'TEXT_ONLY',
+  IMAGE_AND_TEXT = 'IMAGE_AND_TEXT',
 }
 
 export enum ChangeType {
-  FEATURE = "FEATURE",
-  FIX = "FIX",
-  IMPROVEMENT = "IMPROVEMENT",
-  KNOWNISSUE = "KNOWNISSUE",
-  BREAKING = "BREAKING",
-  REMOVED = "REMOVED",
-  NOTE = "NOTE",
+  FEATURE = 'FEATURE',
+  FIX = 'FIX',
+  IMPROVEMENT = 'IMPROVEMENT',
+  KNOWNISSUE = 'KNOWNISSUE',
+  BREAKING = 'BREAKING',
+  REMOVED = 'REMOVED',
+  NOTE = 'NOTE',
 }
 
 export type ChangelogEntryInterface = {

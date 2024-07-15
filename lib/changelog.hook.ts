@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   Changelog,
   UpdateHiveConfig,
   UpdateHiveHookResult,
-} from "./changelog.types.ts";
+} from './changelog.types.ts';
 
-const DEFAULT_API_URL = "https://updatehive.wertarbyte.com/api";
+const DEFAULT_API_URL = 'https://updatehive.wertarbyte.com/api';
 
 const buildRequestURL = (config: UpdateHiveConfig): string => {
   const API_URL = `${config.connection.url ?? DEFAULT_API_URL}`;
   const API_ENDPOINT = config.changelogs.onlyLast
-    ? "/changelogs/latest?"
-    : "/changelogs?";
+    ? '/changelogs/latest?'
+    : '/changelogs?';
   const searchParams = new URLSearchParams({
     product: config.changelogs.product,
   });
@@ -36,7 +36,7 @@ export function useChangelogs(config: UpdateHiveConfig): UpdateHiveHookResult {
       const result = await fetch(requestURL, {
         headers: {
           Authorization: `Bearer ${config.connection.API_KEY}`,
-          Accept: "application/vnd.wertarbyte.changelog.v1+json",
+          Accept: 'application/vnd.wertarbyte.changelog.v1+json',
         },
       });
 
@@ -45,7 +45,7 @@ export function useChangelogs(config: UpdateHiveConfig): UpdateHiveHookResult {
       if (error instanceof Error) {
         setError(error.message);
       } else {
-        setError("An unknown error occurred.");
+        setError('An unknown error occurred.');
       }
     }
 

@@ -1,6 +1,6 @@
-import * as React from "react";
-import { useChangelogs } from "../../changelog.hook.ts";
-import { ChangelogContext } from "../ChangelogContext";
+import * as React from 'react';
+import { useChangelogs } from '../../changelog.hook.ts';
+import { ChangelogContext } from '../ChangelogContext';
 
 interface Props {
   API_KEY: string;
