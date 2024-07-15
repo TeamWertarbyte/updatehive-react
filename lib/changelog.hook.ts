@@ -54,6 +54,8 @@ export function useChangelogs(config: UpdateHiveConfig): UpdateHiveHookResult {
 
   useEffect(() => {
     void fetchData();
+    // Explicitly set to empty array to avoid multiple requests.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
