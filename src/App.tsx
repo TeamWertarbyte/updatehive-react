@@ -1,9 +1,9 @@
+import * as React from 'react';
 import {
+  useChangelogs,
   ChangelogContainer,
   MinimalChangelogList,
-  useChangelogs,
-} from '../lib';
-import * as React from 'react';
+} from '../dist';
 
 export const App: React.FC = () => {
   const API_KEY = import.meta.env.VITE_UPDATEHIVE_API_KEY;
