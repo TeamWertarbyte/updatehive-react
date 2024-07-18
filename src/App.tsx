@@ -1,9 +1,9 @@
+import * as React from 'react';
 import {
+  useChangelogs,
   ChangelogContainer,
   MinimalChangelogList,
-  useChangelogs,
-} from '../lib';
-import * as React from 'react';
+} from '../dist/updatehive-react';
 
 export const App: React.FC = () => {
   const API_KEY = import.meta.env.VITE_UPDATEHIVE_API_KEY;
@@ -38,7 +38,7 @@ export const App: React.FC = () => {
               <div className="hook div">Description</div>
             </div>
             {data.map((changelog, index) => (
-              <div className="hook table" key={`chanelog-${index}`}>
+              <div className="hook table" key={`changelog-${index}`}>
                 <div className="hook div">{changelog.version}</div>
                 <div className="hook div">{changelog.description}</div>
               </div>

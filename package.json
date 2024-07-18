@@ -14,13 +14,14 @@
   "version": "1.0.0",
   "type": "module",
   "main": "dist/updatehive-react.umd.js",
-  "module": "dist/updatehive-react.es.js",
+  "module": "dist/updatehive-react.js",
+  "types": "dist/updatehive-react.d.ts",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "import": "./dist/updatehive-react.es.js",
+      "import": "./dist/updatehive-react.js",
       "require": "./dist/updatehive-react.umd.js"
     }
   },
@@ -50,7 +51,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "typescript": "^5.2.2",
-    "vite": "^5.2.0"
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^4.0.0-beta.0"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
