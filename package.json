@@ -14,13 +14,14 @@
   "version": "1.0.0",
   "type": "module",
   "main": "dist/updatehive-react.umd.js",
-  "module": "dist/updatehive-react.es.js",
+  "module": "dist/updatehive-react.js",
+  "types": "dist/updatehive-react.d.ts",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "import": "./dist/updatehive-react.es.js",
+      "import": "./dist/updatehive-react.js",
       "require": "./dist/updatehive-react.umd.js"
     }
   },

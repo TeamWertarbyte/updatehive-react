@@ -12,9 +12,8 @@ export default defineConfig({
   build: {
     copyPublicDir: false,
     lib: {
-      entry: resolve(__dirname, 'lib/index.ts'),
+      entry: resolve(__dirname, 'lib/updatehive-react.ts'),
       name: 'updatehive-react',
-      fileName: (format) => `updatehive-react.${format}.js`,
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
