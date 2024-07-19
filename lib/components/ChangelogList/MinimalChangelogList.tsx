@@ -1,17 +1,8 @@
-import * as React from "react";
-import { useUpdateHiveContext } from "../ChangelogContext";
-import { Box, CircularProgress, List, ListItem, Typography } from "@mui/joy";
-import { ChangeType } from "../../changelog.types.ts";
-
-const ChangeTypeMap: Record<ChangeType, string> = {
-  [ChangeType.FEATURE]: '[Neu]',
-  [ChangeType.IMPROVEMENT]: '[Angegepasst]',
-  [ChangeType.FIX]: '[Behoben]',
-  [ChangeType.NOTE]: '[Notiz]',
-  [ChangeType.BREAKING]: '[Geändertes Verhalten]',
-  [ChangeType.KNOWNISSUE]: '[Bekanntes Problem]',
-  [ChangeType.REMOVED]: '[Entfernt]',
-};
+import * as React from 'react';
+import { useUpdateHiveContext } from '../ChangelogContext';
+import { Box, CircularProgress, List, ListItem, Typography } from '@mui/joy';
+import { ChangeTypeMap } from '../changelog.util.ts';
+import { ChangeType } from '../../changelog.types.ts';
 
 interface Props {
   changeTypeMapper?: Record<ChangeType, string>;

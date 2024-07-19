@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useChangelogs } from '../../changelog.hook.ts';
 import { ChangelogContext } from '../ChangelogContext';
+import { CssVarsProvider } from '@mui/joy';
 
 interface Props {
   API_KEY: string;
@@ -36,7 +37,7 @@ export const ChangelogContainer: React.FC<Props> = ({
   return (
     <div>
       <ChangelogContext.Provider value={{ loading, error, data }}>
-        {children}
+        <CssVarsProvider>{children}</CssVarsProvider>
       </ChangelogContext.Provider>
     </div>
   );
