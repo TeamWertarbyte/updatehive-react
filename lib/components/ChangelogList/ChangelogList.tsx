@@ -6,10 +6,12 @@ import { ChangeTypeMap, getTypeColor } from '../changelog.util.ts';
 
 interface Props {
   changeTypeMapper?: Record<ChangeType, string>;
+  typeColorResolver?: (type: ChangeType) => string;
 }
 
 export const ChangelogList: React.FC<Props> = ({
   changeTypeMapper = ChangeTypeMap,
+  typeColorResolver = getTypeColor,
 }) => {
   const { loading, error, data } = useUpdateHiveContext();
 
@@ -49,7 +51,7 @@ export const ChangelogList: React.FC<Props> = ({
                         level="title-sm"
                         sx={() => ({
                           marginRight: '8px',
-                          color: getTypeColor(entry.changeType),
+                          color: typeColorResolver(entry.changeType),
                         })}
                       >
                         {changeTypeMapper[entry.changeType]}
