@@ -1,12 +1,25 @@
 import * as React from 'react';
 import { useUpdateHiveContext } from '../ChangelogContext';
 import { Box, CircularProgress, List, ListItem, Typography } from '@mui/joy';
-import { ChangeType } from '../../changelog.types.ts';
-import { ChangeTypeMap, getTypeColor } from '../changelog.util.ts';
+import { Changelog, ChangeType } from '../../changelog.types.ts';
+import {
+  ChangeTypeMap,
+  ComponentEntries,
+  getTypeColor,
+  mapChangelogByComponents,
+} from '../changelog.util.ts';
+import { useMemo } from 'react';
 
 interface Props {
   changeTypeMapper?: Record<ChangeType, string>;
   typeColorResolver?: (type: ChangeType) => string;
+}
+
+interface ChangelogWithComponents {
+  version: string;
+  description?: string;
+
+  entries: ComponentEntries[];
 }
 
 export const ChangelogList: React.FC<Props> = ({
@@ -14,6 +27,24 @@ export const ChangelogList: React.FC<Props> = ({
   typeColorResolver = getTypeColor,
 }) => {
   const { loading, error, data } = useUpdateHiveContext();
+
+  const changelogs: ChangelogWithComponents[] = useMemo(() => {
+    if (!data) {
+      return [];
+    }
+
+    const mapped: ChangelogWithComponents[] = [];
+
+    data.forEach((changelog: Changelog) => {
+      mapped.push({
+        version: changelog.version,
+        description: changelog.description,
+        entries: mapChangelogByComponents(changelog),
+      });
+    });
+
+    return mapped;
+  }, [data]);
 
   return (
     <div>
@@ -25,7 +56,7 @@ export const ChangelogList: React.FC<Props> = ({
       {!error && loading && data === undefined && <CircularProgress />}
       {!error && !loading && data && (
         <div>
-          {data.map((changelog, index) => (
+          {changelogs.map((changelog, index) => (
             <div key={`changelog-${index}`}>
               <Box sx={() => ({ marginBottom: '8px' })}>
                 <Typography level="h3" sx={() => ({ marginRight: '8px' })}>
@@ -35,34 +66,41 @@ export const ChangelogList: React.FC<Props> = ({
                   <Typography>{changelog.description}</Typography>
                 )}
               </Box>
-              <List
-                marker={'circle'}
-                sx={() => ({ '--ListItem-minHeight': 20 })}
-              >
-                {changelog.entries.map((entry, entryIndex) => (
-                  <ListItem
-                    sx={() => ({
-                      padding: '0px',
-                    })}
-                    key={`changelog-${index}-entry-${entryIndex}`}
+              {changelog.entries.map((entry) => (
+                <>
+                  <Typography level="title-lg">{entry.component}</Typography>
+                  <List
+                    marker={'circle'}
+                    sx={() => ({ '--ListItem-minHeight': 20 })}
                   >
-                    <Box sx={() => ({ display: 'flex', flexDirection: 'row' })}>
-                      <Typography
-                        level="title-sm"
+                    {entry.changelogs.map((entry, entryIndex) => (
+                      <ListItem
                         sx={() => ({
-                          marginRight: '8px',
-                          color: typeColorResolver(entry.changeType),
+                          padding: '0px',
                         })}
+                        key={`changelog-${index}-entry-${entryIndex}`}
                       >
-                        {changeTypeMapper[entry.changeType]}
-                      </Typography>
-                      <Typography level="body-sm">
-                        {entry.description}
-                      </Typography>
-                    </Box>
-                  </ListItem>
-                ))}
-              </List>
+                        <Box
+                          sx={() => ({ display: 'flex', flexDirection: 'row' })}
+                        >
+                          <Typography
+                            level="title-sm"
+                            sx={() => ({
+                              marginRight: '8px',
+                              color: typeColorResolver(entry.changeType),
+                            })}
+                          >
+                            {changeTypeMapper[entry.changeType]}
+                          </Typography>
+                          <Typography level="body-sm">
+                            {entry.description}
+                          </Typography>
+                        </Box>
+                      </ListItem>
+                    ))}
+                  </List>
+                </>
+              ))}
             </div>
           ))}
         </div>

@@ -1,4 +1,8 @@
-import { ChangeType } from '../changelog.types.ts';
+import {
+  Changelog,
+  ChangelogEntryInterface,
+  ChangeType,
+} from '../changelog.types.ts';
 
 export const ChangeTypeMap: Record<ChangeType, string> = {
   [ChangeType.FEATURE]: '[Neu]',
@@ -25,4 +29,32 @@ export const getTypeColor = (type: ChangeType): string => {
     default:
       return 'neutral';
   }
+};
+
+export interface ComponentEntries {
+  component: string;
+  changelogs: ChangelogEntryInterface[];
+}
+
+export const mapChangelogByComponents = (
+  changelog: Changelog,
+): ComponentEntries[] => {
+  const components = new Map<string, ChangelogEntryInterface[]>();
+
+  changelog.entries.forEach((changelog) => {
+    const component = changelog.component || 'Weiteres';
+
+    if (!components.has(component)) {
+      components.set(component, []);
+    }
+    components.get(component)?.push(changelog);
+  });
+
+  const componentsArray: ComponentEntries[] = [];
+
+  components.forEach((changelogs, component) => {
+    componentsArray.push({ component, changelogs });
+  });
+
+  return componentsArray;
 };
