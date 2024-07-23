@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useUpdateHiveContext } from '../ChangelogContext';
-import { Box, CircularProgress, List, ListItem, Typography } from '@mui/joy';
+import { Box, List, ListItem, Typography } from '@mui/joy';
 import { Changelog, ChangeType } from '../../changelog.types.ts';
 import {
   ChangeTypeMap,
@@ -26,7 +26,7 @@ export const ChangelogList: React.FC<Props> = ({
   changeTypeMapper = ChangeTypeMap,
   typeColorResolver = getTypeColor,
 }) => {
-  const { loading, error, data } = useUpdateHiveContext();
+  const { data } = useUpdateHiveContext();
 
   const changelogs: ChangelogWithComponents[] = useMemo(() => {
     if (!data) {
@@ -48,13 +48,7 @@ export const ChangelogList: React.FC<Props> = ({
 
   return (
     <div>
-      {error && !loading && data === undefined && (
-        <Typography>
-          Ein Fehler ist beim Laden der Versionshistorie aufgetreten!
-        </Typography>
-      )}
-      {!error && loading && data === undefined && <CircularProgress />}
-      {!error && !loading && data && (
+      {changelogs && (
         <div>
           {changelogs.map((changelog, index) => (
             <div key={`changelog-${index}`}>

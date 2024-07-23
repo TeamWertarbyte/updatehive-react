@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useUpdateHiveContext } from '../ChangelogContext';
-import { Box, CircularProgress, List, ListItem, Typography } from '@mui/joy';
+import { Box, List, ListItem, Typography } from '@mui/joy';
 import { ChangeTypeMap } from '../changelog.util.ts';
 import { ChangeType } from '../../changelog.types.ts';
 
@@ -11,17 +11,11 @@ interface Props {
 export const MinimalChangelogList: React.FC<Props> = ({
   changeTypeMapper = ChangeTypeMap,
 }) => {
-  const { loading, error, data } = useUpdateHiveContext();
+  const { data } = useUpdateHiveContext();
 
   return (
     <div>
-      {error && !loading && data === undefined && (
-        <Typography>
-          Ein Fehler ist beim Laden der Versionshistorie aufgetreten!
-        </Typography>
-      )}
-      {!error && loading && data === undefined && <CircularProgress />}
-      {!error && !loading && data && (
+      {data && (
         <div>
           {data.map((changelog, index) => (
             <div key={`changelog-${index}`}>
