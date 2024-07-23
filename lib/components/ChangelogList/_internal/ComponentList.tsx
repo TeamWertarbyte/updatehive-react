@@ -1,12 +1,12 @@
 import { Box, List, ListItem, Typography } from '@mui/joy';
 import * as React from 'react';
-import { Changelog, ChangeType } from '../../changelog.types.ts';
+import { Changelog, ChangeType } from '../../../changelog.types.ts';
 import { useMemo } from 'react';
 import {
   ChangelogWithComponents,
   groupChangelogsByComponents,
   reorderChangelogs,
-} from '../changelog.util.ts';
+} from '../../changelog.util.ts';
 
 interface Props {
   changelogs: Changelog[];

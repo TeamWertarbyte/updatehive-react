@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useUpdateHiveContext } from '../ChangelogContext';
 import { ChangeType } from '../../changelog.types.ts';
 import { ChangeTypeMap, getTypeColor } from '../changelog.util.ts';
-import ComponentList from './ComponentList.tsx';
-import SimpleList from './SimpleList.tsx';
+import ComponentList from './_internal/ComponentList.tsx';
+import SimpleList from './_internal/SimpleList.tsx';
 import { GroupBy } from './ChangelogList.types.ts';
 
 interface Props {

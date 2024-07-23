@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Changelog, ChangeType } from '../../changelog.types.ts';
+import { Changelog, ChangeType } from '../../../changelog.types.ts';
 import { Box, List, ListItem, Typography } from '@mui/joy';
-import { reorderChangelogs } from '../changelog.util.ts';
+import { reorderChangelogs } from '../../changelog.util.ts';
 import { useMemo } from 'react';
 
 interface Props {
