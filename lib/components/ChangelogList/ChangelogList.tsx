@@ -1,104 +1,36 @@
 import * as React from 'react';
 import { useUpdateHiveContext } from '../ChangelogContext';
-import { Box, List, ListItem, Typography } from '@mui/joy';
-import { Changelog, ChangeType } from '../../changelog.types.ts';
-import {
-  ChangeTypeMap,
-  ComponentEntries,
-  getTypeColor,
-  mapChangelogByComponents,
-} from '../changelog.util.ts';
-import { useMemo } from 'react';
+import { ChangeType } from '../../changelog.types.ts';
+import { ChangeTypeMap, getTypeColor } from '../changelog.util.ts';
+import ComponentList from './ComponentList.tsx';
+import SimpleList from './SimpleList.tsx';
+import { GroupBy } from './ChangelogList.types.ts';
 
 interface Props {
+  groupBy?: GroupBy;
   changeTypeMapper?: Record<ChangeType, string>;
   typeColorResolver?: (type: ChangeType) => string;
-}
-
-interface ChangelogWithComponents {
-  version: string;
-  description?: string;
-
-  entries: ComponentEntries[];
 }
 
 export const ChangelogList: React.FC<Props> = ({
   changeTypeMapper = ChangeTypeMap,
   typeColorResolver = getTypeColor,
+  groupBy = GroupBy.COMPONENT,
 }) => {
   const { data } = useUpdateHiveContext();
 
-  const changelogs: ChangelogWithComponents[] = useMemo(() => {
-    if (!data) {
-      return [];
-    }
-
-    const mapped: ChangelogWithComponents[] = [];
-
-    data.forEach((changelog: Changelog) => {
-      mapped.push({
-        version: changelog.version,
-        description: changelog.description,
-        entries: mapChangelogByComponents(changelog),
-      });
-    });
-
-    return mapped;
-  }, [data]);
-
   return (
     <div>
-      {changelogs && (
-        <div>
-          {changelogs.map((changelog, index) => (
-            <div key={`changelog-${index}`}>
-              <Box sx={() => ({ marginBottom: '8px' })}>
-                <Typography level="h3" sx={() => ({ marginRight: '8px' })}>
-                  Version {changelog.version}
-                </Typography>
-                {changelog.description && (
-                  <Typography>{changelog.description}</Typography>
-                )}
-              </Box>
-              {changelog.entries.map((entry) => (
-                <>
-                  <Typography level="title-lg">{entry.component}</Typography>
-                  <List
-                    marker={'circle'}
-                    sx={() => ({ '--ListItem-minHeight': 20 })}
-                  >
-                    {entry.changelogs.map((entry, entryIndex) => (
-                      <ListItem
-                        sx={() => ({
-                          padding: '0px',
-                        })}
-                        key={`changelog-${index}-entry-${entryIndex}`}
-                      >
-                        <Box
-                          sx={() => ({ display: 'flex', flexDirection: 'row' })}
-                        >
-                          <Typography
-                            level="title-sm"
-                            sx={() => ({
-                              marginRight: '8px',
-                              color: typeColorResolver(entry.changeType),
-                            })}
-                          >
-                            {changeTypeMapper[entry.changeType]}
-                          </Typography>
-                          <Typography level="body-sm">
-                            {entry.description}
-                          </Typography>
-                        </Box>
-                      </ListItem>
-                    ))}
-                  </List>
-                </>
-              ))}
-            </div>
-          ))}
-        </div>
-      )}
+      {data &&
+        (groupBy === GroupBy.COMPONENT ? (
+          <ComponentList
+            changelogs={data}
+            changeTypeMapper={changeTypeMapper}
+            typeColorResolver={typeColorResolver}
+          />
+        ) : (
+          <SimpleList changelogs={data} changeTypeMapper={changeTypeMapper} />
+        ))}
     </div>
   );
 };

@@ -42,7 +42,7 @@ export const mapChangelogByComponents = (
   const components = new Map<string, ChangelogEntryInterface[]>();
 
   changelog.entries.forEach((changelog) => {
-    const component = changelog.component || 'Weiteres';
+    const component = changelog.component || 'Weitere Neuerungen';
 
     if (!components.has(component)) {
       components.set(component, []);

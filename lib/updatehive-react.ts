@@ -13,4 +13,5 @@ export { useUpdateHiveContext } from './components/ChangelogContext';
 export {
   MinimalChangelogList,
   ChangelogList,
+  GroupBy,
 } from './components/ChangelogList';
