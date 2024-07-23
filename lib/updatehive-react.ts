@@ -8,6 +8,10 @@ export type {
 
 export { useChangelogs } from './changelog.hook';
 
-export { ChangelogContainer } from "./components/ChangelogContainer";
-export { useUpdateHiveContext } from "./components/ChangelogContext";
-export { MinimalChangelogList } from "./components/MinimalChangelogList";
+export { ChangelogContainer } from './components/ChangelogContainer';
+export { useUpdateHiveContext } from './components/ChangelogContext';
+export {
+  MinimalChangelogList,
+  ChangelogList,
+  GroupBy,
+} from './components/ChangelogList';

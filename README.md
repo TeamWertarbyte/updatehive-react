@@ -17,7 +17,7 @@ yarn add @wertarbyte/updatehive-react
 
 Either use the react hook and render the changelog yourself or let this library fetch and render the changelog for you.
 
-For a more complete example, see the [App.tsx](./src/App.tsx) in the src directory.
+For a more complete example, see the [App.tsx](https://github.com/TeamWertarbyte/updatehive-react/blob/master/src/App.tsx) in the src directory.
 
 ### Hook
 
@@ -91,3 +91,21 @@ export type UpdateHiveConfig = {
   };
 };
 ```
+
+## Development
+
+### Testing
+
+The library can be easily testet in dev mode via the provided 'dev' script and App.tsx.
+
+```
+# npm
+npm run rev
+
+# yarn
+yarn dev
+```
+
+### ChangelogLists 
+ChangelogLists are split into public (API) classes and their internal representation, to
+separate concerns and allow for easier reusage.

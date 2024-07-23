@@ -1,18 +1,18 @@
-import { createContext, useContext } from "react";
-import { Changelog, UpdateHiveHookResult } from "../../changelog.types.ts";
+import { createContext, useContext } from 'react';
+import { Changelog } from '../../changelog.types.ts';
 
-export const ChangelogContext = createContext<{
-  loading: boolean;
-  error?: string;
+export interface ChangelogContextProps {
   data?: Changelog[];
-}>({ loading: true });
+}
 
-export const useUpdateHiveContext: () => UpdateHiveHookResult = () => {
+export const ChangelogContext = createContext<ChangelogContextProps>({});
+
+export const useUpdateHiveContext: () => ChangelogContextProps = () => {
   const context = useContext(ChangelogContext);
 
   if (!context) {
     throw new Error(
-      "useChangelogContext must be used within a ChangelogContainer",
+      'useChangelogContext must be used within a ChangelogContainer',
     );
   }
 

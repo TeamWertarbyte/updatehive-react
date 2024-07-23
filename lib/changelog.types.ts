@@ -46,6 +46,7 @@ export type ChangelogEntryInterface = {
   description: string;
   name?: string;
   tags?: string[];
+  component?: string;
 };
 
 export type Changelog = {
