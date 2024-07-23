@@ -15,6 +15,16 @@ interface Props {
   children: React.ReactNode;
 }
 
+/**
+ * Container for all UpdateHive react components.
+ * This container is responsible for fetching the changelogs from the UpdateHive API and handling errors / loading states.
+ *
+ * For API_KEY, product, config see UpdateHiveConfig.
+ *
+ * @param children Child components to render loaded changelogs.
+ * @param Error Overridable error component to render if an error occurs.
+ * @param Loading Overridable loading component to render while loading.
+ */
 export const ChangelogContainer: React.FC<Props> = ({
   API_KEY,
   product,

@@ -8,6 +8,13 @@ interface Props {
   changeTypeMapper?: Record<ChangeType, string>;
 }
 
+/**
+ * Component which renders a minimal changelog list.
+ *
+ * The list is only ordered by creation.
+ *
+ * @param changeTypeMapper Overridable mapping of change types to displayable representations.
+ */
 export const MinimalChangelogList: React.FC<Props> = ({
   changeTypeMapper = ChangeTypeMap,
 }) => {

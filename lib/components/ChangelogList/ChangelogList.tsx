@@ -12,6 +12,14 @@ interface Props {
   typeColorResolver?: (type: ChangeType) => string;
 }
 
+/**
+ * Base component to render a list of changelogs.
+ *
+ * @param changeTypeMapper Overridable mapping of change types to displayable representations.
+ * @param typeColorResolver Overridable function to resolve the color of a change type.
+ * @param groupBy Group changelogs by component or show a simple list.
+ * @constructor
+ */
 export const ChangelogList: React.FC<Props> = ({
   changeTypeMapper = ChangeTypeMap,
   typeColorResolver = getTypeColor,
