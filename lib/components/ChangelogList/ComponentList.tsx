@@ -3,16 +3,10 @@ import * as React from 'react';
 import { Changelog, ChangeType } from '../../changelog.types.ts';
 import { useMemo } from 'react';
 import {
-  ComponentEntries,
-  mapChangelogByComponents,
+  ChangelogWithComponents,
+  groupChangelogsByComponents,
+  reorderChangelogs,
 } from '../changelog.util.ts';
-
-interface ChangelogWithComponents {
-  version: string;
-  description?: string;
-
-  entries: ComponentEntries[];
-}
 
 interface Props {
   changelogs: Changelog[];
@@ -26,17 +20,8 @@ const ComponentList: React.FC<Props> = ({
   typeColorResolver,
 }) => {
   const componentChangelogs: ChangelogWithComponents[] = useMemo(() => {
-    const mapped: ChangelogWithComponents[] = [];
-
-    changelogs.forEach((changelog: Changelog) => {
-      mapped.push({
-        version: changelog.version,
-        description: changelog.description,
-        entries: mapChangelogByComponents(changelog),
-      });
-    });
-
-    return mapped;
+    const reorderedChangelogs = reorderChangelogs(changelogs);
+    return groupChangelogsByComponents(reorderedChangelogs);
   }, [changelogs]);
 
   return (

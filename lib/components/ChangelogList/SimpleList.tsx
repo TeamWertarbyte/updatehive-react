@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Changelog, ChangeType } from '../../changelog.types.ts';
 import { Box, List, ListItem, Typography } from '@mui/joy';
+import { reorderChangelogs } from '../changelog.util.ts';
+import { useMemo } from 'react';
 
 interface Props {
   changeTypeMapper: Record<ChangeType, string>;
@@ -8,9 +10,13 @@ interface Props {
 }
 
 const SimpleList: React.FC<Props> = ({ changelogs, changeTypeMapper }) => {
+  const reorderedChangelogs = useMemo(() => {
+    return reorderChangelogs(changelogs);
+  }, [changelogs]);
+
   return (
     <div>
-      {changelogs.map((changelog, index) => (
+      {reorderedChangelogs.map((changelog, index) => (
         <div key={`changelog-${index}`}>
           <Box sx={() => ({ marginBottom: '8px' })}>
             <Typography level="h3" sx={() => ({ marginRight: '8px' })}>

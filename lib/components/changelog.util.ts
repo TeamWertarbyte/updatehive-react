@@ -31,12 +31,37 @@ export const getTypeColor = (type: ChangeType): string => {
   }
 };
 
+export const reorderChangelogs = (changelogs: Changelog[]) => {
+  return changelogs.toReversed();
+};
+
+export interface ChangelogWithComponents {
+  version: string;
+  description?: string;
+
+  entries: ComponentEntries[];
+}
+
+export const groupChangelogsByComponents = (changelogs: Changelog[]) => {
+  const mapped: ChangelogWithComponents[] = [];
+
+  changelogs.forEach((changelog: Changelog) => {
+    mapped.push({
+      version: changelog.version,
+      description: changelog.description,
+      entries: groupChangelogByComponents(changelog),
+    });
+  });
+
+  return mapped;
+};
+
 export interface ComponentEntries {
   component: string;
   changelogs: ChangelogEntryInterface[];
 }
 
-export const mapChangelogByComponents = (
+export const groupChangelogByComponents = (
   changelog: Changelog,
 ): ComponentEntries[] => {
   const components = new Map<string, ChangelogEntryInterface[]>();
