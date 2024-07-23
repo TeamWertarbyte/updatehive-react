@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   useChangelogs,
   ChangelogContainer,
-  MinimalChangelogList,
+  ChangelogList,
 } from '../dist/updatehive-react';
 
 export const App: React.FC = () => {
@@ -52,7 +52,7 @@ export const App: React.FC = () => {
         product={PRODUCT}
         config={{ url: serviceURL }}
       >
-        <MinimalChangelogList />
+        <ChangelogList />
       </ChangelogContainer>
     </div>
   );
