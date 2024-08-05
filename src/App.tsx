@@ -3,12 +3,12 @@ import {
   ChangelogContainer,
   ChangelogList,
   useChangelogs,
-} from '../lib/updatehive-react.ts';
+} from '../dist/updatehive-react';
 
 export const App: React.FC = () => {
-  const API_KEY = import.meta.env.VITE_UPDATEHIVE_API_KEY;
-  const PRODUCT = import.meta.env.VITE_UPDATEHIVE_PRODUCT;
-  const serviceURL = import.meta.env.VITE_UPDATEHIVE_URL;
+  const API_KEY = import.meta.env.VITE_UPDATEHIVE_API_KEY as string;
+  const PRODUCT = import.meta.env.VITE_UPDATEHIVE_PRODUCT as string;
+  const serviceURL = import.meta.env.VITE_UPDATEHIVE_URL as string;
 
   const { loading, error, data } = useChangelogs({
     connection: {
