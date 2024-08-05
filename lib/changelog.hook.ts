@@ -40,6 +40,11 @@ export function useChangelogs(config: UpdateHiveConfig): UpdateHiveHookResult {
         },
       });
 
+      if (!result.ok) {
+        const error = await result.json();
+        throw new Error(error.message);
+      }
+
       setData(await result.json());
     } catch (error) {
       if (error instanceof Error) {

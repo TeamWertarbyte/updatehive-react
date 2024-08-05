@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {
-  useChangelogs,
   ChangelogContainer,
   ChangelogList,
+  useChangelogs,
 } from '../dist/updatehive-react';
 
 export const App: React.FC = () => {
-  const API_KEY = import.meta.env.VITE_UPDATEHIVE_API_KEY;
-  const PRODUCT = import.meta.env.VITE_UPDATEHIVE_PRODUCT;
-  const serviceURL = import.meta.env.VITE_UPDATEHIVE_URL;
+  const API_KEY = import.meta.env.VITE_UPDATEHIVE_API_KEY as string;
+  const PRODUCT = import.meta.env.VITE_UPDATEHIVE_PRODUCT as string;
+  const serviceURL = import.meta.env.VITE_UPDATEHIVE_URL as string;
 
   const { loading, error, data } = useChangelogs({
     connection: {
@@ -29,7 +29,7 @@ export const App: React.FC = () => {
       <h1>UpdateHive - React Client Component</h1>
       <h3>Example using UpdateHive react hook</h3>
       <div>
-        {loading || data === undefined ? (
+        {loading || error || data === undefined ? (
           <div>Loading changelogs ...</div>
         ) : (
           <div>

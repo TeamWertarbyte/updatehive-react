@@ -57,14 +57,12 @@ export const ChangelogContainer: React.FC<Props> = ({
   }
 
   return (
-    <div>
-      <ChangelogContext.Provider value={{ data }}>
-        {errorMessage && <Error error={errorMessage} />}
-        {!errorMessage && loading && <Loading />}
-        {!errorMessage && !loading && data && (
-          <CssVarsProvider>{children}</CssVarsProvider>
-        )}
-      </ChangelogContext.Provider>
-    </div>
+    <ChangelogContext.Provider value={{ data }}>
+      {errorMessage && <Error error={errorMessage} />}
+      {!errorMessage && loading && <Loading />}
+      {!errorMessage && !loading && data && (
+        <CssVarsProvider>{children}</CssVarsProvider>
+      )}
+    </ChangelogContext.Provider>
   );
 };

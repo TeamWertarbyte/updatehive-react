@@ -1,10 +1,17 @@
 import * as React from 'react';
 import { useUpdateHiveContext } from '../ChangelogContext';
 import { ChangeType } from '../../changelog.types.ts';
-import { ChangeTypeMap, getTypeColor } from '../changelog.util.ts';
+import {
+  ChangelogWithComponents,
+  ChangeTypeMap,
+  getTypeColor,
+  groupChangelogsByComponents,
+  reorderChangelogs,
+  ungroupedChangelogs,
+} from '../changelog.util.ts';
 import ComponentList from './_internal/ComponentList.tsx';
-import SimpleList from './_internal/SimpleList.tsx';
 import { GroupBy } from './ChangelogList.types.ts';
+import { useMemo } from 'react';
 
 interface Props {
   groupBy?: GroupBy;
@@ -27,18 +34,30 @@ export const ChangelogList: React.FC<Props> = ({
 }) => {
   const { data } = useUpdateHiveContext();
 
+  const componentChangelogs: ChangelogWithComponents[] | undefined =
+    useMemo(() => {
+      if (!data) {
+        return undefined;
+      }
+
+      const reorderedChangelogs = reorderChangelogs(data);
+
+      if (groupBy === GroupBy.NONE) {
+        return ungroupedChangelogs(reorderedChangelogs);
+      }
+
+      return groupChangelogsByComponents(reorderedChangelogs);
+    }, [data, groupBy]);
+
   return (
-    <div>
-      {data &&
-        (groupBy === GroupBy.COMPONENT ? (
-          <ComponentList
-            changelogs={data}
-            changeTypeMapper={changeTypeMapper}
-            typeColorResolver={typeColorResolver}
-          />
-        ) : (
-          <SimpleList changelogs={data} changeTypeMapper={changeTypeMapper} />
-        ))}
-    </div>
+    <>
+      {componentChangelogs && (
+        <ComponentList
+          changelogs={componentChangelogs}
+          changeTypeMapper={changeTypeMapper}
+          typeColorResolver={typeColorResolver}
+        />
+      )}
+    </>
   );
 };

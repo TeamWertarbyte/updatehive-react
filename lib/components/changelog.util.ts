@@ -42,7 +42,19 @@ export interface ChangelogWithComponents {
   entries: ComponentEntries[];
 }
 
-export const groupChangelogsByComponents = (changelogs: Changelog[]) => {
+export const ungroupedChangelogs = (
+  changelogs: Changelog[],
+): ChangelogWithComponents[] => {
+  return changelogs.map((changelog) => ({
+    version: changelog.version,
+    description: changelog.description,
+    entries: [{ component: '', changelogs: changelog.entries }],
+  }));
+};
+
+export const groupChangelogsByComponents = (
+  changelogs: Changelog[],
+): ChangelogWithComponents[] => {
   const mapped: ChangelogWithComponents[] = [];
 
   changelogs.forEach((changelog: Changelog) => {
@@ -57,7 +69,7 @@ export const groupChangelogsByComponents = (changelogs: Changelog[]) => {
 };
 
 export interface ComponentEntries {
-  component: string;
+  component?: string;
   changelogs: ChangelogEntryInterface[];
 }
 

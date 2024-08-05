@@ -1,15 +1,10 @@
 import { Box, List, ListItem, Typography } from '@mui/joy';
 import * as React from 'react';
-import { Changelog, ChangeType } from '../../../changelog.types.ts';
-import { useMemo } from 'react';
-import {
-  ChangelogWithComponents,
-  groupChangelogsByComponents,
-  reorderChangelogs,
-} from '../../changelog.util.ts';
+import { ChangeType } from '../../../changelog.types.ts';
+import { ChangelogWithComponents } from '../../changelog.util.ts';
 
 interface Props {
-  changelogs: Changelog[];
+  changelogs: ChangelogWithComponents[];
   changeTypeMapper: Record<ChangeType, string>;
   typeColorResolver: (type: ChangeType) => string;
 }
@@ -19,17 +14,12 @@ const ComponentList: React.FC<Props> = ({
   changeTypeMapper,
   typeColorResolver,
 }) => {
-  const componentChangelogs: ChangelogWithComponents[] = useMemo(() => {
-    const reorderedChangelogs = reorderChangelogs(changelogs);
-    return groupChangelogsByComponents(reorderedChangelogs);
-  }, [changelogs]);
-
   return (
-    <div>
-      {componentChangelogs.map((changelog, index) => (
-        <div key={`changelog-${index}`}>
-          <Box sx={() => ({ marginBottom: '8px' })}>
-            <Typography level="h3" sx={() => ({ marginRight: '8px' })}>
+    <>
+      {changelogs.map((changelog, index) => (
+        <div key={`changelogs-${index}`}>
+          <Box sx={() => ({ mb: 1 })}>
+            <Typography level="h3" sx={() => ({ mr: 1 })}>
               Version {changelog.version}
             </Typography>
             {changelog.description && (
@@ -37,24 +27,24 @@ const ComponentList: React.FC<Props> = ({
             )}
           </Box>
           {changelog.entries.map((entry) => (
-            <>
-              <Typography level="title-lg">{entry.component}</Typography>
+            <div key={`changelogs-${index}-components-${entry.component}`}>
+              {entry.component && (
+                <Typography level="title-lg">{entry.component}</Typography>
+              )}
               <List
                 marker={'circle'}
                 sx={() => ({ '--ListItem-minHeight': 20 })}
               >
                 {entry.changelogs.map((entry, entryIndex) => (
                   <ListItem
-                    sx={() => ({
-                      padding: '0px',
-                    })}
-                    key={`changelog-${index}-entry-${entryIndex}`}
+                    sx={() => ({ p: 0 })}
+                    key={`changelogs-${changelog.version}-entry-${entryIndex}`}
                   >
                     <Box sx={() => ({ display: 'flex', flexDirection: 'row' })}>
                       <Typography
                         level="title-sm"
                         sx={() => ({
-                          marginRight: '8px',
+                          mr: 1,
                           color: typeColorResolver(entry.changeType),
                         })}
                       >
@@ -67,11 +57,11 @@ const ComponentList: React.FC<Props> = ({
                   </ListItem>
                 ))}
               </List>
-            </>
+            </div>
           ))}
         </div>
       ))}
-    </div>
+    </>
   );
 };
 
