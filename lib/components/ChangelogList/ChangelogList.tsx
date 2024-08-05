@@ -50,7 +50,7 @@ export const ChangelogList: React.FC<Props> = ({
     }, [data, groupBy]);
 
   return (
-    <div>
+    <>
       {componentChangelogs && (
         <ComponentList
           changelogs={componentChangelogs}
@@ -58,6 +58,6 @@ export const ChangelogList: React.FC<Props> = ({
           typeColorResolver={typeColorResolver}
         />
       )}
-    </div>
+    </>
   );
 };

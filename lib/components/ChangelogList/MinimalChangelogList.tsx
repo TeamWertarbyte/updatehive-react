@@ -38,7 +38,7 @@ export const MinimalChangelogList: React.FC<Props> = ({
     }, [data]);
 
   return (
-    <div>
+    <>
       {componentChangelogs && (
         <ComponentList
           changelogs={componentChangelogs}
@@ -46,6 +46,6 @@ export const MinimalChangelogList: React.FC<Props> = ({
           typeColorResolver={getTypeColor}
         />
       )}
-    </div>
+    </>
   );
 };
