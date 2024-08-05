@@ -100,7 +100,7 @@ The library can be easily testet in dev mode via the provided 'dev' script and A
 
 ```
 # npm
-npm run rev
+npm run dev
 
 # yarn
 yarn dev
