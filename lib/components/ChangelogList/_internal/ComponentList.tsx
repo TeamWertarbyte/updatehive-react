@@ -18,8 +18,8 @@ const ComponentList: React.FC<Props> = ({
     <>
       {changelogs.map((changelog, index) => (
         <div key={`changelogs-${index}`}>
-          <Box sx={() => ({ marginBottom: '8px' })}>
-            <Typography level="h3" sx={() => ({ marginRight: '8px' })}>
+          <Box sx={() => ({ mb: 1 })}>
+            <Typography level="h3" sx={() => ({ mr: 1 })}>
               Version {changelog.version}
             </Typography>
             {changelog.description && (
@@ -37,16 +37,14 @@ const ComponentList: React.FC<Props> = ({
               >
                 {entry.changelogs.map((entry, entryIndex) => (
                   <ListItem
-                    sx={() => ({
-                      padding: '0px',
-                    })}
+                    sx={() => ({ p: 0 })}
                     key={`changelogs-${changelog.version}-entry-${entryIndex}`}
                   >
                     <Box sx={() => ({ display: 'flex', flexDirection: 'row' })}>
                       <Typography
                         level="title-sm"
                         sx={() => ({
-                          marginRight: '8px',
+                          mr: 1,
                           color: typeColorResolver(entry.changeType),
                         })}
                       >
