@@ -1,8 +1,15 @@
 import * as React from 'react';
 import { useUpdateHiveContext } from '../ChangelogContext';
-import { ChangeTypeMap } from '../changelog.util.ts';
+import {
+  ChangelogWithComponents,
+  ChangeTypeMap,
+  getTypeColor,
+  reorderChangelogs,
+  ungroupedChangelogs,
+} from '../changelog.util.ts';
 import { ChangeType } from '../../changelog.types.ts';
-import SimpleList from './_internal/SimpleList.tsx';
+import { useMemo } from 'react';
+import ComponentList from './_internal/ComponentList.tsx';
 
 interface Props {
   changeTypeMapper?: Record<ChangeType, string>;
@@ -20,10 +27,24 @@ export const MinimalChangelogList: React.FC<Props> = ({
 }) => {
   const { data } = useUpdateHiveContext();
 
+  const componentChangelogs: ChangelogWithComponents[] | undefined =
+    useMemo(() => {
+      if (!data) {
+        return undefined;
+      }
+
+      const reorderedChangelogs = reorderChangelogs(data);
+      return ungroupedChangelogs(reorderedChangelogs);
+    }, [data]);
+
   return (
     <div>
-      {data && (
-        <SimpleList changeTypeMapper={changeTypeMapper} changelogs={data} />
+      {componentChangelogs && (
+        <ComponentList
+          changelogs={componentChangelogs}
+          changeTypeMapper={changeTypeMapper}
+          typeColorResolver={getTypeColor}
+        />
       )}
     </div>
   );
