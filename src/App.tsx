@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {
-  useChangelogs,
   ChangelogContainer,
   ChangelogList,
-} from '../dist/updatehive-react';
+  useChangelogs,
+} from '../lib/updatehive-react.ts';
 
 export const App: React.FC = () => {
   const API_KEY = import.meta.env.VITE_UPDATEHIVE_API_KEY;
@@ -29,7 +29,7 @@ export const App: React.FC = () => {
       <h1>UpdateHive - React Client Component</h1>
       <h3>Example using UpdateHive react hook</h3>
       <div>
-        {loading || data === undefined ? (
+        {loading || error || data === undefined ? (
           <div>Loading changelogs ...</div>
         ) : (
           <div>
