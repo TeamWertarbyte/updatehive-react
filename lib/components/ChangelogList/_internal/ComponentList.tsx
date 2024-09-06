@@ -1,4 +1,4 @@
-import { Box, List, ListItem, Typography } from '@mui/joy';
+import { Box, Divider, List, ListItem, Typography } from '@mui/joy';
 import * as React from 'react';
 import { ChangeType } from '../../../changelog.types.ts';
 import { ChangelogWithComponents } from '../../changelog.util.ts';
@@ -22,6 +22,12 @@ const ComponentList: React.FC<Props> = ({
             <Typography level="h3" sx={() => ({ mr: 1 })}>
               Version {changelog.version}
             </Typography>
+            <Divider
+              sx={{
+                mt: 1,
+                mb: 2,
+              }}
+            />
             {changelog.description && (
               <Typography>{changelog.description}</Typography>
             )}
