@@ -44,6 +44,7 @@ export const MinimalChangelogList: React.FC<Props> = ({
           changelogs={componentChangelogs}
           changeTypeMapper={changeTypeMapper}
           typeColorResolver={getTypeColor}
+          hideEntryType
         />
       )}
     </>

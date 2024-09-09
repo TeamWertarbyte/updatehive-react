@@ -7,12 +7,14 @@ interface Props {
   changelogs: ChangelogWithComponents[];
   changeTypeMapper: Record<ChangeType, string>;
   typeColorResolver: (type: ChangeType) => string;
+  hideEntryType?: boolean;
 }
 
 const ComponentList: React.FC<Props> = ({
   changelogs,
   changeTypeMapper,
   typeColorResolver,
+  hideEntryType = false,
 }) => {
   return (
     <Box
@@ -75,16 +77,18 @@ const ComponentList: React.FC<Props> = ({
                       <Typography level="body-sm" sx={{ flexGrow: 1 }}>
                         {entry.description}
                       </Typography>
-                      <Chip
-                        sx={{
-                          color: typeColorResolver(entry.changeType),
-                          flexShrink: 0,
-                          width: 'auto',
-                        }}
-                        variant={'outlined'}
-                      >
-                        {changeTypeMapper[entry.changeType]}
-                      </Chip>
+                      {!hideEntryType && (
+                        <Chip
+                          sx={{
+                            color: typeColorResolver(entry.changeType),
+                            flexShrink: 0,
+                            width: 'auto',
+                          }}
+                          variant={'outlined'}
+                        >
+                          {changeTypeMapper[entry.changeType]}
+                        </Chip>
+                      )}
                     </Box>
                   ))}
                 </CardContent>
