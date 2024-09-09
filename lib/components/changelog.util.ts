@@ -5,13 +5,13 @@ import {
 } from '../changelog.types.ts';
 
 export const ChangeTypeMap: Record<ChangeType, string> = {
-  [ChangeType.FEATURE]: '[Neu]',
-  [ChangeType.IMPROVEMENT]: '[Angegepasst]',
-  [ChangeType.FIX]: '[Behoben]',
-  [ChangeType.NOTE]: '[Notiz]',
-  [ChangeType.BREAKING]: '[Geändertes Verhalten]',
-  [ChangeType.KNOWNISSUE]: '[Bekanntes Problem]',
-  [ChangeType.REMOVED]: '[Entfernt]',
+  [ChangeType.FEATURE]: 'Neu',
+  [ChangeType.IMPROVEMENT]: 'Angegepasst',
+  [ChangeType.FIX]: 'Behoben',
+  [ChangeType.NOTE]: 'Notiz',
+  [ChangeType.BREAKING]: 'Geändertes Verhalten',
+  [ChangeType.KNOWNISSUE]: 'Bekanntes Problem',
+  [ChangeType.REMOVED]: 'Entfernt',
 };
 
 export const getTypeColor = (type: ChangeType): string => {

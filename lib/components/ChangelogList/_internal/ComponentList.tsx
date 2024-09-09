@@ -1,4 +1,4 @@
-import { Box, Divider, List, ListItem, Typography } from '@mui/joy';
+import { Box, Card, CardContent, Chip, Divider, Typography } from '@mui/joy';
 import * as React from 'react';
 import { ChangeType } from '../../../changelog.types.ts';
 import { ChangelogWithComponents } from '../../changelog.util.ts';
@@ -23,63 +23,72 @@ const ComponentList: React.FC<Props> = ({
       }}
     >
       {changelogs.map((changelog, index) => (
-        <div key={`changelogs-${index}`}>
-          <Box sx={() => ({ mb: 2 })}>
+        <Card key={`changelogs-${index}`} variant={'soft'}>
+          <Box sx={() => ({ mb: 1 })}>
             <Typography level="h1">Version {changelog.version}</Typography>
             <Divider
               sx={{
                 mt: 1,
                 mb: 2,
+                mx: -2,
               }}
             />
             {changelog.description && (
-              <Typography>{changelog.description}</Typography>
+              <Typography color={'neutral'}>{changelog.description}</Typography>
             )}
           </Box>
-          <Box
+          <CardContent
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 1,
+              gap: 2,
             }}
           >
             {changelog.entries.map((entry) => (
-              <div key={`changelogs-${index}-components-${entry.component}`}>
+              <Card
+                key={`changelogs-${index}-components-${entry.component}`}
+                variant={'outlined'}
+              >
                 {entry.component && (
-                  <Typography level="title-lg">{entry.component}</Typography>
+                  <>
+                    <Typography level="title-lg">{entry.component}</Typography>
+                    <Divider
+                      sx={{
+                        mx: -2,
+                      }}
+                    />
+                  </>
                 )}
-                <List
-                  marker={'circle'}
-                  sx={() => ({ '--ListItem-minHeight': 20 })}
+                <CardContent
+                  sx={{
+                    gap: 2,
+                  }}
                 >
                   {entry.changelogs.map((entry, entryIndex) => (
-                    <ListItem
-                      sx={{ p: 0 }}
+                    <Box
                       key={`changelogs-${changelog.version}-entry-${entryIndex}`}
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 0.5,
+                        alignItems: 'flex-start',
+                      }}
                     >
-                      <Box
-                        sx={() => ({ display: 'flex', flexDirection: 'row' })}
+                      <Typography level="body-sm">
+                        {entry.description}
+                      </Typography>
+                      <Chip
+                        sx={{
+                          color: typeColorResolver(entry.changeType),
+                        }}
                       >
-                        <Typography
-                          level="title-sm"
-                          sx={{
-                            mr: 1,
-                            color: typeColorResolver(entry.changeType),
-                          }}
-                        >
-                          {changeTypeMapper[entry.changeType]}
-                        </Typography>
-                        <Typography level="body-sm">
-                          {entry.description}
-                        </Typography>
-                      </Box>
-                    </ListItem>
+                        {changeTypeMapper[entry.changeType]}
+                      </Chip>
+                    </Box>
                   ))}
-                </List>
-              </div>
+                </CardContent>
+              </Card>
             ))}
-          </Box>
-        </div>
+          </CardContent>
+        </Card>
       ))}
     </Box>
   );
