@@ -67,17 +67,19 @@ const ComponentList: React.FC<Props> = ({
                       key={`changelogs-${changelog.version}-entry-${entryIndex}`}
                       sx={{
                         display: 'flex',
-                        flexDirection: 'column',
+                        flexDirection: 'row',
                         gap: 0.5,
-                        alignItems: 'flex-start',
+                        alignItems: 'baseline',
                       }}
                     >
-                      <Typography level="body-sm">
+                      <Typography level="body-sm" sx={{ flexGrow: 1 }}>
                         {entry.description}
                       </Typography>
                       <Chip
                         sx={{
                           color: typeColorResolver(entry.changeType),
+                          flexShrink: 0,
+                          width: 'auto',
                         }}
                         variant={'outlined'}
                       >
