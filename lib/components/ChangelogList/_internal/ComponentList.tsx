@@ -19,7 +19,7 @@ const ComponentList: React.FC<Props> = ({
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        gap: 6,
+        gap: 3,
       }}
     >
       {changelogs.map((changelog, index) => (
@@ -79,6 +79,7 @@ const ComponentList: React.FC<Props> = ({
                         sx={{
                           color: typeColorResolver(entry.changeType),
                         }}
+                        variant={'outlined'}
                       >
                         {changeTypeMapper[entry.changeType]}
                       </Chip>
