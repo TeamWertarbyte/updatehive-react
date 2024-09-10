@@ -6,7 +6,7 @@ import {
 
 export const ChangeTypeMap: Record<ChangeType, string> = {
   [ChangeType.FEATURE]: 'Neu',
-  [ChangeType.IMPROVEMENT]: 'Angegepasst',
+  [ChangeType.IMPROVEMENT]: 'Angepasst',
   [ChangeType.FIX]: 'Behoben',
   [ChangeType.NOTE]: 'Notiz',
   [ChangeType.BREAKING]: 'Geändertes Verhalten',
