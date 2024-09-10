@@ -45,7 +45,18 @@ export function useChangelogs(config: UpdateHiveConfig): UpdateHiveHookResult {
         throw new Error(error.message);
       }
 
-      setData(await result.json());
+      const resultData: Changelog[] | undefined = await result.json();
+
+      if (resultData) {
+        setData(
+          resultData.sort((a, b) => {
+            return (
+              new Date(b.releaseDate).getTime() -
+              new Date(a.releaseDate).getTime()
+            );
+          }),
+        );
+      }
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

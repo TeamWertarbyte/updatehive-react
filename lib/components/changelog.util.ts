@@ -31,10 +31,6 @@ export const getTypeColor = (type: ChangeType): string => {
   }
 };
 
-export const reorderChangelogs = (changelogs: Changelog[]) => {
-  return changelogs.toReversed();
-};
-
 export interface ChangelogWithComponents {
   version: string;
   description?: string;
