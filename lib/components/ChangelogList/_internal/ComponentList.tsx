@@ -28,6 +28,13 @@ const ComponentList: React.FC<Props> = ({
         <Card key={`changelogs-${index}`} variant={'soft'}>
           <Box sx={() => ({ mb: 1 })}>
             <Typography level="h1">Version {changelog.version}</Typography>
+            <Typography level="h4" color={'neutral'}>
+              {new Intl.DateTimeFormat('de-DE', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              }).format(new Date(changelog.releaseDate))}
+            </Typography>
             <Divider
               sx={{
                 mt: 1,

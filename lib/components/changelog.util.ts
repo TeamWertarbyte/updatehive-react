@@ -31,10 +31,8 @@ export const getTypeColor = (type: ChangeType): string => {
   }
 };
 
-export interface ChangelogWithComponents {
-  version: string;
-  description?: string;
-
+export interface ChangelogWithComponents
+  extends Pick<Changelog, 'version' | 'description' | 'releaseDate'> {
   entries: ComponentEntries[];
 }
 
@@ -44,6 +42,7 @@ export const ungroupedChangelogs = (
   return changelogs.map((changelog) => ({
     version: changelog.version,
     description: changelog.description,
+    releaseDate: changelog.releaseDate,
     entries: [{ component: '', changelogs: changelog.entries }],
   }));
 };
@@ -57,6 +56,7 @@ export const groupChangelogsByComponents = (
     mapped.push({
       version: changelog.version,
       description: changelog.description,
+      releaseDate: changelog.releaseDate,
       entries: groupChangelogByComponents(changelog),
     });
   });
