@@ -1,4 +1,4 @@
-import { Box, List, ListItem, Typography } from '@mui/joy';
+import { Box, Card, CardContent, Chip, Divider, Typography } from '@mui/joy';
 import * as React from 'react';
 import { ChangeType } from '../../../changelog.types.ts';
 import { ChangelogWithComponents } from '../../changelog.util.ts';
@@ -7,61 +7,97 @@ interface Props {
   changelogs: ChangelogWithComponents[];
   changeTypeMapper: Record<ChangeType, string>;
   typeColorResolver: (type: ChangeType) => string;
+  hideEntryType?: boolean;
 }
 
 const ComponentList: React.FC<Props> = ({
   changelogs,
   changeTypeMapper,
   typeColorResolver,
+  hideEntryType = false,
 }) => {
   return (
-    <>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 3,
+      }}
+    >
       {changelogs.map((changelog, index) => (
-        <div key={`changelogs-${index}`}>
+        <Card key={`changelogs-${index}`} variant={'soft'}>
           <Box sx={() => ({ mb: 1 })}>
-            <Typography level="h3" sx={() => ({ mr: 1 })}>
-              Version {changelog.version}
-            </Typography>
+            <Typography level="h1">Version {changelog.version}</Typography>
+            <Divider
+              sx={{
+                mt: 1,
+                mb: 2,
+                mx: -2,
+              }}
+            />
             {changelog.description && (
-              <Typography>{changelog.description}</Typography>
+              <Typography color={'neutral'}>{changelog.description}</Typography>
             )}
           </Box>
-          {changelog.entries.map((entry) => (
-            <div key={`changelogs-${index}-components-${entry.component}`}>
-              {entry.component && (
-                <Typography level="title-lg">{entry.component}</Typography>
-              )}
-              <List
-                marker={'circle'}
-                sx={() => ({ '--ListItem-minHeight': 20 })}
+          <CardContent
+            sx={{
+              gap: 2,
+            }}
+          >
+            {changelog.entries.map((entry) => (
+              <Card
+                key={`changelogs-${index}-components-${entry.component}`}
+                variant={'outlined'}
               >
-                {entry.changelogs.map((entry, entryIndex) => (
-                  <ListItem
-                    sx={() => ({ p: 0 })}
-                    key={`changelogs-${changelog.version}-entry-${entryIndex}`}
-                  >
-                    <Box sx={() => ({ display: 'flex', flexDirection: 'row' })}>
-                      <Typography
-                        level="title-sm"
-                        sx={() => ({
-                          mr: 1,
-                          color: typeColorResolver(entry.changeType),
-                        })}
-                      >
-                        {changeTypeMapper[entry.changeType]}
-                      </Typography>
-                      <Typography level="body-sm">
+                {entry.component && (
+                  <>
+                    <Typography level="title-lg">{entry.component}</Typography>
+                    <Divider
+                      sx={{
+                        mx: -2,
+                      }}
+                    />
+                  </>
+                )}
+                <CardContent
+                  sx={{
+                    gap: 2,
+                  }}
+                >
+                  {entry.changelogs.map((entry, entryIndex) => (
+                    <Box
+                      key={`changelogs-${changelog.version}-entry-${entryIndex}`}
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: 0.5,
+                        alignItems: 'baseline',
+                      }}
+                    >
+                      <Typography level="body-sm" sx={{ flexGrow: 1 }}>
                         {entry.description}
                       </Typography>
+                      {!hideEntryType && (
+                        <Chip
+                          sx={{
+                            color: typeColorResolver(entry.changeType),
+                            flexShrink: 0,
+                            width: 'auto',
+                          }}
+                          variant={'outlined'}
+                        >
+                          {changeTypeMapper[entry.changeType]}
+                        </Chip>
+                      )}
                     </Box>
-                  </ListItem>
-                ))}
-              </List>
-            </div>
-          ))}
-        </div>
+                  ))}
+                </CardContent>
+              </Card>
+            ))}
+          </CardContent>
+        </Card>
       ))}
-    </>
+    </Box>
   );
 };
 
