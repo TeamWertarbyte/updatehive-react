@@ -1,21 +1,25 @@
 /**
  * Configuration to retrieve changelogs from UpdateHive.
- *
- * @param connection
- *    API_KEY:        API_KEY to access UpdateHive public REST API.
- *    url:            Override the default URL to UpdateHive API.
- *
- * @param changelogs
- *    product:        Product ID to retrieve changelogs for.
- *    onlyLast:       Retrieve only the last changelog.
  */
 export type UpdateHiveConfig = {
   connection: {
+    /**
+     * API_KEY to access UpdateHive public REST API.
+     */
     API_KEY: string;
+    /**
+     * Override the default URL to UpdateHive API.
+     */
     url?: string;
   };
   changelogs: {
+    /**
+     * Product ID to retrieve changelogs for.
+     */
     product: string;
+    /**
+     * Retrieve only the last changelog.
+     */
     onlyLast?: boolean;
   };
 };
