@@ -41,7 +41,7 @@ const Changelog = () => {
     <div>
       <h1>{changelog.title}</h1>
       <ul>
-        {changelog.entries.map(entry => (
+        {changelog.entries.map((entry) => (
           <li key={entry.id}>{entry.version}</li>
         ))}
       </ul>
@@ -53,7 +53,10 @@ const Changelog = () => {
 ### Component
 
 ```tsx
-import { ChangelogContainer, MinimalChangelogList, } from '@wertarbyte/updatehive-react';
+import {
+  ChangelogContainer,
+  MinimalChangelogList,
+} from '@wertarbyte/updatehive-react';
 
 return (
   <ChangelogContainer
@@ -101,11 +104,9 @@ The library can be easily testet in dev mode via the provided 'dev' script and A
 ```
 # npm
 npm run dev
-
-# yarn
-yarn dev
 ```
 
-### ChangelogLists 
+### ChangelogLists
+
 ChangelogLists are split into public (API) classes and their internal representation, to
 separate concerns and allow for easier reusage.
