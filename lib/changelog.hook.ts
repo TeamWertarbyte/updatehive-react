@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Changelog,
   UpdateHiveConfig,
@@ -27,47 +27,46 @@ export function useChangelogs(config: UpdateHiveConfig): UpdateHiveHookResult {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>();
 
-  const fetchData = async () => {
-    setIsLoading(true);
-
-    const requestURL = buildRequestURL(config);
-
-    try {
-      const result = await fetch(requestURL, {
-        headers: {
-          Authorization: `Bearer ${config.connection.API_KEY}`,
-          Accept: 'application/vnd.wertarbyte.changelog.v1+json',
-        },
-      });
-
-      if (!result.ok) {
-        const error = await result.json();
-        throw new Error(error.message);
-      }
-
-      const resultData: Changelog[] | undefined = await result.json();
-
-      if (resultData) {
-        setData(
-          resultData.sort((a, b) => Date.parse(b.releaseDate) - Date.parse(a.releaseDate)),
-        );
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError('An unknown error occurred.');
-      }
-    }
-
-    setIsLoading(false);
-  };
+  const requestURL = useMemo(() => buildRequestURL(config), [config]);
+  const apiKey = config.connection.API_KEY;
 
   useEffect(() => {
-    void fetchData();
-    // Explicitly set to empty array to avoid multiple requests.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    void (async () => {
+      setIsLoading(true);
+
+      try {
+        const result = await fetch(requestURL, {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            Accept: 'application/vnd.wertarbyte.changelog.v1+json',
+          },
+        });
+
+        if (!result.ok) {
+          const error = await result.json();
+          throw new Error(error.message);
+        }
+        const resultData: Changelog[] | undefined = await result.json();
+        if (resultData) {
+          setData(
+            resultData.sort(
+              (a, b) => Date.parse(b.releaseDate) - Date.parse(a.releaseDate),
+            ),
+          );
+        } else {
+          setError('Did not receive a changelog.');
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('An unknown error occurred.');
+        }
+      }
+
+      setIsLoading(false);
+    })();
+  }, [apiKey, requestURL]);
 
   return {
     loading: isLoading,
