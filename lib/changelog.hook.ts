@@ -31,6 +31,8 @@ export function useChangelogs(config: UpdateHiveConfig): UpdateHiveHookResult {
   const apiKey = config.connection.API_KEY;
 
   useEffect(() => {
+    const ac = new AbortController();
+
     void (async () => {
       setIsLoading(true);
 
@@ -40,6 +42,7 @@ export function useChangelogs(config: UpdateHiveConfig): UpdateHiveHookResult {
             Authorization: `Bearer ${apiKey}`,
             Accept: 'application/vnd.wertarbyte.changelog.v1+json',
           },
+          signal: ac.signal,
         });
 
         if (!result.ok) {
@@ -58,6 +61,9 @@ export function useChangelogs(config: UpdateHiveConfig): UpdateHiveHookResult {
         }
       } catch (error) {
         if (error instanceof Error) {
+          if (error.name === 'AbortError') {
+            return; // fetch aborted, ie. unmounted component or config changed
+          }
           setError(error.message);
         } else {
           setError('An unknown error occurred.');
@@ -66,6 +72,10 @@ export function useChangelogs(config: UpdateHiveConfig): UpdateHiveHookResult {
 
       setIsLoading(false);
     })();
+
+    return () => {
+      ac.abort();
+    };
   }, [apiKey, requestURL]);
 
   return {
