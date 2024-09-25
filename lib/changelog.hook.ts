@@ -49,12 +49,7 @@ export function useChangelogs(config: UpdateHiveConfig): UpdateHiveHookResult {
 
       if (resultData) {
         setData(
-          resultData.sort((a, b) => {
-            return (
-              new Date(b.releaseDate).getTime() -
-              new Date(a.releaseDate).getTime()
-            );
-          }),
+          resultData.sort((a, b) => Date.parse(b.releaseDate) - Date.parse(a.releaseDate)),
         );
       }
     } catch (error) {
