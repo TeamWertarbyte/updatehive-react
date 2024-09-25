@@ -6,7 +6,6 @@ import {
   ChangeTypeMap,
   getTypeColor,
   groupChangelogsByComponents,
-  reorderChangelogs,
   ungroupedChangelogs,
 } from '../changelog.util.ts';
 import ComponentList from './_internal/ComponentList.tsx';
@@ -40,13 +39,11 @@ export const ChangelogList: React.FC<Props> = ({
         return undefined;
       }
 
-      const reorderedChangelogs = reorderChangelogs(data);
-
       if (groupBy === GroupBy.NONE) {
-        return ungroupedChangelogs(reorderedChangelogs);
+        return ungroupedChangelogs(data);
       }
 
-      return groupChangelogsByComponents(reorderedChangelogs);
+      return groupChangelogsByComponents(data);
     }, [data, groupBy]);
 
   return (

@@ -53,7 +53,7 @@ export type Changelog = {
   product: string;
   variant: VariantType;
   version: string;
-  releaseDate: Date;
+  releaseDate: string;
   title?: string;
   description?: string;
   entries: ChangelogEntryInterface[];

@@ -4,7 +4,6 @@ import {
   ChangelogWithComponents,
   ChangeTypeMap,
   getTypeColor,
-  reorderChangelogs,
   ungroupedChangelogs,
 } from '../changelog.util.ts';
 import { ChangeType } from '../../changelog.types.ts';
@@ -33,8 +32,7 @@ export const MinimalChangelogList: React.FC<Props> = ({
         return undefined;
       }
 
-      const reorderedChangelogs = reorderChangelogs(data);
-      return ungroupedChangelogs(reorderedChangelogs);
+      return ungroupedChangelogs(data);
     }, [data]);
 
   return (
