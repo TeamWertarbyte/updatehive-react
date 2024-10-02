@@ -13,6 +13,7 @@ interface Props {
 }
 
 /**
+ * @deprecated Use `ChangelogList` with groupBy=GroupBy.NONE instead and hideEntryType=true.
  * Component which renders a minimal changelog list.
  *
  * The list is only ordered by creation.
@@ -32,14 +33,10 @@ export const MinimalChangelogList: React.FC<Props> = ({ changeTypeMapper }) => {
     }, [data]);
 
   return (
-    <>
-      {componentChangelogs && (
-        <ComponentList
-          changelogs={componentChangelogs}
-          changeTypeMapper={changeTypeMapper}
-          hideEntryType
-        />
-      )}
-    </>
+    <ComponentList
+      changelogs={componentChangelogs}
+      changeTypeMapper={changeTypeMapper}
+      hideEntryType
+    />
   );
 };

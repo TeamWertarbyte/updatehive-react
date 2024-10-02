@@ -8,14 +8,14 @@ import {
 } from '../changelog.util.ts';
 
 interface Props {
-  changelogs: ChangelogWithComponents[];
+  changelogs?: ChangelogWithComponents[];
   changeTypeMapper?: Record<ChangeType, string>;
   typeColorResolver?: (type: ChangeType) => string;
   hideEntryType?: boolean;
 }
 
 export const ComponentList: React.FC<Props> = ({
-  changelogs,
+  changelogs = [],
   changeTypeMapper = ChangeTypeMap,
   typeColorResolver = getTypeColor,
   hideEntryType = false,

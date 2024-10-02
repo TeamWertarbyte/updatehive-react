@@ -3,8 +3,6 @@ import { useUpdateHiveContext } from '../ChangelogContext';
 import { ChangeType } from '../../changelog.types.ts';
 import {
   ChangelogWithComponents,
-  ChangeTypeMap,
-  getTypeColor,
   groupChangelogsByComponents,
   ungroupedChangelogs,
 } from '../changelog.util.ts';
@@ -16,6 +14,7 @@ interface Props {
   groupBy?: GroupBy;
   changeTypeMapper?: Record<ChangeType, string>;
   typeColorResolver?: (type: ChangeType) => string;
+  hideEntryType?: boolean;
 }
 
 /**
@@ -24,12 +23,14 @@ interface Props {
  * @param changeTypeMapper Overridable mapping of change types to displayable representations.
  * @param typeColorResolver Overridable function to resolve the color of a change type.
  * @param groupBy Group changelogs by component or show a simple list.
+ * @param hideEntryType Hide the type of the changelog entry.
  * @constructor
  */
 export const ChangelogList: React.FC<Props> = ({
   changeTypeMapper,
   typeColorResolver,
   groupBy = GroupBy.COMPONENT,
+  hideEntryType = false,
 }) => {
   const { data } = useUpdateHiveContext();
 
@@ -47,14 +48,11 @@ export const ChangelogList: React.FC<Props> = ({
     }, [data, groupBy]);
 
   return (
-    <>
-      {componentChangelogs && (
-        <ComponentList
-          changelogs={componentChangelogs}
-          changeTypeMapper={changeTypeMapper}
-          typeColorResolver={typeColorResolver}
-        />
-      )}
-    </>
+    <ComponentList
+      changelogs={componentChangelogs}
+      changeTypeMapper={changeTypeMapper}
+      typeColorResolver={typeColorResolver}
+      hideEntryType={hideEntryType}
+    />
   );
 };
