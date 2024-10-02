@@ -65,7 +65,7 @@ export const groupChangelogsByComponents = (
 };
 
 export interface ComponentEntries {
-  component?: string;
+  component: string;
   changelogs: ChangelogEntryInterface[];
 }
 
@@ -87,6 +87,16 @@ export const groupChangelogByComponents = (
 
   components.forEach((changelogs, component) => {
     componentsArray.push({ component, changelogs });
+  });
+
+  componentsArray.sort((a, b) => {
+    if (a.component === 'Weitere Neuerungen') {
+      return 1;
+    }
+    if (b.component === 'Weitere Neuerungen') {
+      return -1;
+    }
+    return a.component.localeCompare(b.component);
   });
 
   return componentsArray;
