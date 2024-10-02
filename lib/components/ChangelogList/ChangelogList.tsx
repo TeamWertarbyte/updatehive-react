@@ -8,7 +8,7 @@ import {
   groupChangelogsByComponents,
   ungroupedChangelogs,
 } from '../changelog.util.ts';
-import ComponentList from './_internal/ComponentList.tsx';
+import { ComponentList } from './ComponentList.tsx';
 import { GroupBy } from './ChangelogList.types.ts';
 import { useMemo } from 'react';
 
@@ -27,8 +27,8 @@ interface Props {
  * @constructor
  */
 export const ChangelogList: React.FC<Props> = ({
-  changeTypeMapper = ChangeTypeMap,
-  typeColorResolver = getTypeColor,
+  changeTypeMapper,
+  typeColorResolver,
   groupBy = GroupBy.COMPONENT,
 }) => {
   const { data } = useUpdateHiveContext();
