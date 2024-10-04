@@ -8,6 +8,7 @@ export type {
 
 export { useChangelogs } from './changelog.hook';
 
+export * from './components/changelog.util';
 export * from './components/Base';
 export { ChangelogContainer } from './components/ChangelogContainer';
 export { useUpdateHiveContext } from './components/ChangelogContext';
