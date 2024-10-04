@@ -6,7 +6,7 @@ import {
   groupChangelogsByComponents,
   ungroupedChangelogs,
 } from '../changelog.util.ts';
-import { ComponentList } from './ComponentList.tsx';
+import { ChangelogListBase } from '../Base';
 import { GroupBy } from './ChangelogList.types.ts';
 import { useMemo } from 'react';
 
@@ -48,7 +48,7 @@ export const ChangelogList: React.FC<Props> = ({
     }, [data, groupBy]);
 
   return (
-    <ComponentList
+    <ChangelogListBase
       changelogs={componentChangelogs}
       changeTypeMapper={changeTypeMapper}
       typeColorResolver={typeColorResolver}

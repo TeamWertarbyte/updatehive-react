@@ -6,7 +6,7 @@ import {
 } from '../changelog.util.ts';
 import { ChangeType } from '../../changelog.types.ts';
 import { useMemo } from 'react';
-import { ComponentList } from './ComponentList.tsx';
+import { ChangelogListBase } from '../Base';
 
 interface Props {
   changeTypeMapper?: Record<ChangeType, string>;
@@ -33,7 +33,7 @@ export const MinimalChangelogList: React.FC<Props> = ({ changeTypeMapper }) => {
     }, [data]);
 
   return (
-    <ComponentList
+    <ChangelogListBase
       changelogs={componentChangelogs}
       changeTypeMapper={changeTypeMapper}
       hideEntryType
