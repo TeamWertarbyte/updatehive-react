@@ -14,7 +14,7 @@ interface Props {
   hideEntryType?: boolean;
 }
 
-export const ComponentList: React.FC<Props> = ({
+export const ChangelogListBase: React.FC<Props> = ({
   changelogs = [],
   changeTypeMapper = ChangeTypeMap,
   typeColorResolver = getTypeColor,
