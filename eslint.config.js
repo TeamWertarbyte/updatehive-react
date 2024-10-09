@@ -10,4 +10,11 @@ export default [
   ...tseslint.configs.strict,
   ...tseslint.configs.stylistic,
   pluginReact.configs.flat.recommended,
+  {
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+  },
 ];
