@@ -1,7 +1,7 @@
 /**
  * Configuration to retrieve changelogs from UpdateHive.
  */
-export type UpdateHiveConfig = {
+export interface UpdateHiveConfig {
   connection: {
     /**
      * API_KEY to access UpdateHive public REST API.
@@ -22,13 +22,13 @@ export type UpdateHiveConfig = {
      */
     onlyLast?: boolean;
   };
-};
+}
 
-export type UpdateHiveHookResult = {
+export interface UpdateHiveHookResult {
   loading: boolean;
   error?: string;
   data?: Changelog[];
-};
+}
 
 export enum VariantType {
   TEXT_ONLY = 'TEXT_ONLY',
@@ -45,15 +45,15 @@ export enum ChangeType {
   NOTE = 'NOTE',
 }
 
-export type ChangelogEntryInterface = {
+export interface ChangelogEntryInterface {
   changeType: ChangeType;
   description: string;
   name?: string;
   tags?: string[];
   component?: string;
-};
+}
 
-export type Changelog = {
+export interface Changelog {
   product: string;
   variant: VariantType;
   version: string;
@@ -61,4 +61,4 @@ export type Changelog = {
   title?: string;
   description?: string;
   entries: ChangelogEntryInterface[];
-};
+}

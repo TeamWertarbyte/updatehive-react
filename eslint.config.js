@@ -7,6 +7,7 @@ export default [
   { files: ['**/*.{ts,jsx,tsx}'] },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
+  ...tseslint.configs.strict,
+  ...tseslint.configs.stylistic,
   pluginReact.configs.flat.recommended,
 ];
